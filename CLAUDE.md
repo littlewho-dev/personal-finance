@@ -1,0 +1,277 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+Personal finance dashboard MVP - a read-only Next.js application displaying net worth, accounts, and financial history from mocked JSON data. See `docs/PRD.md` for full requirements.
+
+## Development Workflow (ATDD - Required)
+
+**All features must follow this workflow strictly:**
+
+### Phase 1: Planning
+
+1. Understand the feature requirements
+2. Verify alignment with `docs/PRD.md` scope
+3. Identify the single most important user journey
+
+### Phase 2: Acceptance Test
+
+4. Write **one** high-level Gherkin scenario in `features/` capturing the core user journey
+5. Keep it focused - one scenario per feature, additional scenarios only for critical edge cases
+
+### Phase 3: Implementation
+
+6. Implement step definitions in `features/steps/`
+7. Write implementation code in small increments
+8. Run acceptance test frequently - stop when it passes
+
+### Phase 4: Quality Checks
+
+9. Run static checks: `pnpm check-all`
+10. Fix any issues found
+11. Run agent reviews: `pnpm agent:review`
+12. Fix issues from agent feedback
+
+### Phase 5: Iterate (Max 3 Passes)
+
+13. Repeat quality checks → fix cycle
+14. **Maximum 3 iterations** to avoid infinite loops
+15. If issues persist after 3 passes → **stop and ask human for guidance**
+
+```
+┌─────────────┐
+│  Planning   │
+└──────┬──────┘
+       ▼
+┌─────────────┐
+│  Write AT   │  (one acceptance test)
+└──────┬──────┘
+       ▼
+┌─────────────┐
+│ Implement   │◄──┐
+└──────┬──────┘   │ (small increments until AT passes)
+       ▼          │
+   AT passes? ────┘ No
+       │ Yes
+       ▼
+┌─────────────┐
+│Static Checks│◄──┐
+└──────┬──────┘   │
+       ▼          │
+┌─────────────┐   │
+│Agent Reviews│   │ (max 3 iterations)
+└──────┬──────┘   │
+       ▼          │
+   All pass? ─────┘ No (& iteration < 3)
+       │ Yes
+       ▼
+┌─────────────┐    No (& iteration ≥ 3)
+│    Done     │    ──────► Ask Human
+└─────────────┘
+```
+
+**No implementation code should be written without a corresponding feature file.**
+
+## Environment Setup
+
+Before working on this project, always run:
+
+```bash
+nvm use
+```
+
+This loads the correct Node.js version (24) from `.nvmrc`.
+
+## Commands
+
+**Package manager: pnpm** (do not use npm or yarn)
+
+```bash
+# Development
+pnpm dev                 # Start dev server (localhost:3000)
+pnpm build               # Production build
+pnpm start               # Start production server
+
+# Testing
+pnpm test:e2e            # Run all Playwright acceptance tests
+pnpm test:e2e --grep "feature name"  # Run specific feature
+
+# Static Analysis
+pnpm lint                # ESLint
+pnpm format              # Prettier format
+pnpm format:check        # Prettier check (CI)
+pnpm type-check          # TypeScript (tsc --noEmit)
+pnpm spell-check         # cspell
+pnpm find-unused         # knip (dead code detection)
+
+# Run all checks (same as CI)
+pnpm check-all           # lint + format:check + type-check + spell-check + find-unused
+
+# Agent Reviews
+pnpm agent:review        # Run all 4 agent reviews
+```
+
+## Architecture
+
+```
+src/
+├── app/                 # Next.js App Router pages
+├── components/
+│   ├── ui/              # shadcn/ui primitives
+│   ├── dashboard/       # Dashboard-specific components
+│   ├── history/         # History page components
+│   └── common/          # Shared components (CurrencyDisplay)
+├── lib/
+│   ├── types.ts         # TypeScript interfaces
+│   ├── data.ts          # Mock data loading functions
+│   └── i18n/messages.ts # Externalized UI strings
+└── data/                # Mock JSON files (accounts, snapshots, settings)
+
+features/                # Gherkin .feature files
+├── steps/               # Step definitions
+└── support/             # Playwright-bdd setup
+
+.claude/
+├── agents/              # Agent review prompts
+│   ├── architecture.md
+│   ├── tests.md
+│   ├── docs.md
+│   └── naming.md
+└── skills/              # Custom skills
+    └── log-time.md      # Time tracking skill
+
+docs/
+├── PRD.md               # Product requirements
+└── time-log.md          # Time tracking entries
+```
+
+## Key Patterns
+
+- **i18n-ready**: All UI strings in `lib/i18n/messages.ts`, never hardcoded
+- **Theming**: Colors via CSS variables in `globals.css`
+- **Data flow**: Components read from `lib/data.ts` which loads mock JSON
+- **Currency formatting**: Use `CurrencyDisplay` component with locale from settings
+
+## CI/CD
+
+**GitHub Actions Pipeline (PRs):**
+
+Stage 1 - Static Analysis (parallel):
+
+- `lint` - ESLint
+- `format:check` - Prettier
+- `type-check` - TypeScript
+- `spell-check` - cspell
+- `find-unused` - knip
+
+Stage 2 - Tests:
+
+- `test:e2e` - Playwright acceptance tests
+
+Stage 3 - Agent Reviews (parallel, after stages 1-2 pass):
+
+- `agent:architecture` - Structure and dependencies
+- `agent:tests` - ATDD compliance
+- `agent:docs` - Documentation and i18n
+- `agent:naming` - Domain terminology
+
+**Pre-commit Hooks (Husky + lint-staged):**
+
+- ESLint + Prettier on staged files
+- commitlint validates commit message format
+
+**CD**: Auto-deploy to Vercel staging on merge to main
+
+**Branch strategy**: Trunk-based (main + short-lived feature branches)
+
+## Agent Reviews (Post-CI)
+
+After standard CI checks pass, specialized review agents analyze the PR. Each agent is focused and has few rules. Agent reviews run in parallel and can block merge.
+
+### Architecture Agent
+
+Reviews structural decisions requiring contextual judgment.
+
+- Is the component placed in the semantically correct directory for its purpose?
+- Does the separation of concerns make sense for this feature's complexity?
+- Are there hidden coupling or circular dependencies between modules?
+
+### Tests Agent
+
+Reviews test coverage and scenario completeness.
+
+- Do the feature scenarios cover the meaningful user journeys?
+- Are edge cases and error states represented in acceptance criteria?
+- Does test coverage match the feature's risk and complexity?
+
+### Documentation Agent
+
+Reviews alignment with project scope and intent.
+
+- Does this change align with the PRD scope, or is it scope creep?
+- Are there undocumented behavioral changes that users should know about?
+- Would a new contributor understand why this decision was made?
+- Is `CLAUDE.md` up to date with any workflow, architecture, or pattern changes?
+
+### Naming Agent
+
+Reviews semantic accuracy of names against domain language.
+
+- Do names reflect domain terminology from the PRD accurately?
+- Would a domain expert recognize these terms?
+- Are similar concepts named consistently across the codebase?
+
+## Commit Message Convention
+
+Enforced via commitlint. Format:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+```
+
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `ci`
+
+Examples:
+
+- `feat(dashboard): add net worth card component`
+- `fix(history): correct date formatting in snapshot list`
+- `test(dashboard): add category table acceptance tests`
+- `ci: add spell-check to pipeline`
+
+## Time Tracking
+
+Use the `/log-time` skill to record work sessions.
+
+**Usage:** `/log-time 1h $3.50`
+
+**What it does:**
+
+1. Reads conversation history since last time log entry
+2. Summarizes work done in 3-5 short sentences
+3. Appends entry to `docs/time-log.md` with date, duration, cost, and summary
+
+**Time log format:**
+
+```markdown
+## 2024-01-15
+
+- **Duration:** 2h
+- **Cost:** $3.50
+- **Summary:** Set up Next.js project with Tailwind and shadcn/ui. Configured ESLint, Prettier, and Husky pre-commit hooks. Created initial project structure following PRD architecture.
+```
+
+## Tech Stack
+
+- **Node.js**: 24 (via nvm, see `.nvmrc`)
+- **Package manager**: pnpm
+- Next.js (App Router) + TypeScript
+- Tailwind CSS + shadcn/ui
+- Playwright + playwright-bdd for acceptance tests
+- ESLint + Prettier for code quality
+- Husky + lint-staged + commitlint for git hooks
+- knip for dead code detection
+- cspell for spell checking
