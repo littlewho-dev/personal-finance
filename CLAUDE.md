@@ -6,16 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal finance dashboard MVP - a read-only Next.js application displaying net worth, accounts, and financial history from mocked JSON data. See `docs/PRD.md` for full requirements.
 
-## Environment Setup
-
-Before working on this project, always run:
-
-```bash
-nvm use
-```
-
-This loads the correct Node.js version (24) from `.nvmrc`.
-
 ## Development Workflow (ATDD - Required)
 
 **All features must follow this workflow strictly:**
@@ -203,43 +193,6 @@ Agent reviews run locally via `pnpm agent:review` to avoid API costs in CI:
 
 **Branch strategy**: Trunk-based (main + short-lived feature branches)
 
-## Agent Reviews (Post-CI)
-
-After standard CI checks pass, specialized review agents analyze the PR. Each agent is focused and has few rules. Agent reviews run in parallel and can block merge.
-
-### Architecture Agent
-
-Reviews structural decisions requiring contextual judgment.
-
-- Is the component placed in the semantically correct directory for its purpose?
-- Does the separation of concerns make sense for this feature's complexity?
-- Are there hidden coupling or circular dependencies between modules?
-
-### Tests Agent
-
-Reviews test coverage and scenario completeness.
-
-- Do the feature scenarios cover the meaningful user journeys?
-- Are edge cases and error states represented in acceptance criteria?
-- Does test coverage match the feature's risk and complexity?
-
-### Documentation Agent
-
-Reviews alignment with project scope and intent.
-
-- Does this change align with the PRD scope, or is it scope creep?
-- Are there undocumented behavioral changes that users should know about?
-- Would a new contributor understand why this decision was made?
-- Is `CLAUDE.md` up to date with any workflow, architecture, or pattern changes?
-
-### Naming Agent
-
-Reviews semantic accuracy of names against domain language.
-
-- Do names reflect domain terminology from the PRD accurately?
-- Would a domain expert recognize these terms?
-- Are similar concepts named consistently across the codebase?
-
 ## Commit Message Convention
 
 Enforced via commitlint. Format:
@@ -264,12 +217,6 @@ Examples:
 Use the `/log-time` skill to record work sessions.
 
 **Usage:** `/log-time 1h $3.50`
-
-**What it does:**
-
-1. Reads conversation history since last time log entry
-2. Summarizes work done in 3-5 short sentences
-3. Appends entry to `docs/time-log.md` with date, duration, cost, and summary
 
 **Time log format:**
 
