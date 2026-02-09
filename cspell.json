@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "tailwindcss",
+    "shadcn",
+    "commitlint",
+    "pnpm",
+    "knip",
+    "cspell",
+    "nextjs",
+    "playwright",
+    "gherkin",
+    "networth",
+    "subtype"
+  ],
+  "ignorePaths": ["node_modules", ".next", "pnpm-lock.yaml", "*.json"]
+}
