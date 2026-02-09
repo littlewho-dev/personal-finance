@@ -23,3 +23,31 @@ This project is designed to be built entirely by AI agents using [Claude Code](h
 - **Quality gates** - Static analysis + agent feedback loops
 
 See `CLAUDE.md` for the full development workflow.
+
+## Reducing Token Usage
+
+Best practices to minimize API costs when working with Claude Code:
+
+**File Operations**
+
+- Use `limit` parameter when reading large files
+- Avoid re-reading files you just wrote
+- Use `Glob` and `Grep` to find specific content instead of reading entire files
+
+**Command Output**
+
+- Pipe verbose commands through `| tail -n 20` to limit output
+- Check exit codes instead of parsing full output when possible
+- Prefer quiet flags when available (e.g., `--quiet`, `-q`)
+
+**Session Management**
+
+- Use `/compact` frequently to reset context
+- Keep sessions focused on single features
+- Start fresh sessions for unrelated tasks
+
+**Tool Selection**
+
+- Use `haiku` model for simple exploration tasks
+- Use dedicated tools (Read, Glob, Grep) instead of bash equivalents
+- Batch independent operations in parallel

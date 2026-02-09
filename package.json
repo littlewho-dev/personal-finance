@@ -11,8 +11,10 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "spell-check": "cspell \"**/*.{ts,tsx,md}\"",
+    "spell-check:quiet": "cspell \"**/*.{ts,tsx,md}\" --no-progress --no-summary",
     "find-unused": "knip",
     "check-all": "pnpm lint && pnpm format:check && pnpm type-check && pnpm spell-check && pnpm find-unused",
+    "check-all:quiet": "pnpm lint && pnpm format:check --log-level warn && pnpm type-check && pnpm spell-check:quiet && pnpm find-unused",
     "test:e2e": "pnpm exec bddgen && playwright test",
     "test:e2e:ui": "pnpm exec bddgen && playwright test --ui",
     "prepare": "husky"

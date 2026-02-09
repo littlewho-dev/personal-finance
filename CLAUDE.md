@@ -236,3 +236,25 @@ Use the `/log-time` skill to record work sessions.
 - Husky + lint-staged + commitlint for git hooks
 - knip for dead code detection
 - cspell for spell checking
+
+## Token Efficiency
+
+Minimize API costs by reducing context size:
+
+**Reading Files**
+
+- Use `limit` parameter: `Read file_path limit=50`
+- Don't re-read files you just wrote
+- Use Grep to find specific lines instead of reading entire files
+
+**Running Commands**
+
+- Use quiet mode: `pnpm check-all:quiet` (less verbose output)
+- Trust exit codes over parsing full output
+- Limit output when needed: `command 2>&1 | tail -20`
+
+**Session Hygiene**
+
+- Run `/compact` after completing features
+- One feature per session when possible
+- Use `model: haiku` in Task tool for simple searches
