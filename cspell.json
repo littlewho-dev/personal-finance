@@ -12,7 +12,9 @@
     "playwright",
     "gherkin",
     "networth",
-    "subtype"
+    "subtype",
+    "ATDD",
+    "logomark"
   ],
   "ignorePaths": ["node_modules", ".next", "pnpm-lock.yaml", "*.json"]
 }

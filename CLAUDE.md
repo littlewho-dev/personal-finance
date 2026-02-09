@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal finance dashboard MVP - a read-only Next.js application displaying net worth, accounts, and financial history from mocked JSON data. See `docs/PRD.md` for full requirements.
 
+## Environment Setup
+
+Before working on this project, always run:
+
+```bash
+nvm use
+```
+
+This loads the correct Node.js version (24) from `.nvmrc`.
+
 ## Development Workflow (ATDD - Required)
 
 **All features must follow this workflow strictly:**
@@ -170,17 +180,22 @@ Stage 2 - Tests:
 
 - `test:e2e` - Playwright acceptance tests
 
-Stage 3 - Agent Reviews (parallel, after stages 1-2 pass):
+**Pre-commit Hooks (Husky):**
+
+- lint-staged (ESLint + Prettier on staged files)
+- type-check (TypeScript)
+- spell-check (cspell)
+- find-unused (knip)
+- commitlint validates commit message format
+
+**Agent Reviews (local only):**
+
+Agent reviews run locally via `pnpm agent:review` to avoid API costs in CI:
 
 - `agent:architecture` - Structure and dependencies
 - `agent:tests` - ATDD compliance
 - `agent:docs` - Documentation and i18n
 - `agent:naming` - Domain terminology
-
-**Pre-commit Hooks (Husky + lint-staged):**
-
-- ESLint + Prettier on staged files
-- commitlint validates commit message format
 
 **CD**: Auto-deploy to Vercel staging on merge to main
 

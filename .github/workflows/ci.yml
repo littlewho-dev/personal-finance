@@ -101,39 +101,5 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # Stage 3: Agent Reviews (after tests pass)
-  agent-architecture:
-    runs-on: ubuntu-latest
-    needs: [test-e2e]
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Architecture Review
-        run: echo "Agent review placeholder - integrate with Claude API"
-
-  agent-tests:
-    runs-on: ubuntu-latest
-    needs: [test-e2e]
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Tests Review
-        run: echo "Agent review placeholder - integrate with Claude API"
-
-  agent-docs:
-    runs-on: ubuntu-latest
-    needs: [test-e2e]
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Documentation Review
-        run: echo "Agent review placeholder - integrate with Claude API"
-
-  agent-naming:
-    runs-on: ubuntu-latest
-    needs: [test-e2e]
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Naming Review
-        run: echo "Agent review placeholder - integrate with Claude API"
+  # Note: Agent reviews (architecture, tests, docs, naming) run locally only
+  # via `pnpm agent:review` to avoid API costs in CI
