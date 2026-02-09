@@ -188,6 +188,8 @@ Stage 2 - Tests:
 - find-unused (knip)
 - commitlint validates commit message format
 
+**Never use `--no-verify`** - always fix failing checks instead of bypassing them.
+
 **Agent Reviews (local only):**
 
 Agent reviews run locally via `pnpm agent:review` to avoid API costs in CI:
