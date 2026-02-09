@@ -134,13 +134,8 @@ features/                # Gherkin .feature files
 └── support/             # Playwright-bdd setup
 
 .claude/
-├── agents/              # Agent review prompts
-│   ├── architecture.md
-│   ├── tests.md
-│   ├── docs.md
-│   └── naming.md
-└── skills/              # Custom skills
-    └── log-time.md      # Time tracking skill
+├── agents/              # Sub-agents (architecture, tests, docs, naming)
+└── skills/              # Custom skills (log-time)
 
 docs/
 ├── PRD.md               # Product requirements
