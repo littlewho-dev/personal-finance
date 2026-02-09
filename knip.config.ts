@@ -1,24 +1,22 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-  entry: ['src/app/**/*.{ts,tsx}'],
+  entry: ['src/app/**/*.{ts,tsx}', 'src/components/ui/**/*.{ts,tsx}'],
   project: ['src/**/*.{ts,tsx}'],
   ignore: [
     '**/*.d.ts',
-    // Foundational files used when features are built
+    // shadcn/ui components export more than we use (library pattern)
+    'src/components/ui/**/*.tsx',
+    // Foundational files - exports used by future features
     'src/lib/data.ts',
-    'src/lib/types.ts',
-    'src/lib/utils.ts',
     'src/lib/i18n/messages.ts',
   ],
   ignoreDependencies: [
     'tw-animate-css',
-    // shadcn/ui dependencies (configured, used when components added)
+    // shadcn/ui dependencies
     'class-variance-authority',
-    'clsx',
     'lucide-react',
     'radix-ui',
-    'tailwind-merge',
     // Tooling dependencies
     'eslint-config-prettier',
     'eslint-plugin-prettier',
