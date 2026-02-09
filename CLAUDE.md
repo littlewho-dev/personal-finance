@@ -31,7 +31,7 @@ Personal finance dashboard MVP - a read-only Next.js application displaying net 
 
 9. Run static checks: `pnpm check-all`
 10. Fix any issues found
-11. Run agent reviews: `pnpm agent:review`
+11. Run agent reviews (Claude Code will invoke sub-agents from `.claude/agents/`)
 12. Fix issues from agent feedback
 
 ### Phase 5: Iterate (Max 3 Passes)
@@ -108,9 +108,6 @@ pnpm find-unused         # knip (dead code detection)
 
 # Run all checks (same as CI)
 pnpm check-all           # lint + format:check + type-check + spell-check + find-unused
-
-# Agent Reviews
-pnpm agent:review        # Run all 4 agent reviews
 ```
 
 ## Architecture
@@ -175,14 +172,14 @@ Stage 2 - Tests:
 
 **Never use `--no-verify`** - always fix failing checks instead of bypassing them.
 
-**Agent Reviews (local only):**
+**Agent Reviews:**
 
-Agent reviews run locally via `pnpm agent:review` to avoid API costs in CI:
+Claude Code sub-agents in `.claude/agents/` run during the quality check phase:
 
-- `agent:architecture` - Structure and dependencies
-- `agent:tests` - ATDD compliance
-- `agent:docs` - Documentation and i18n
-- `agent:naming` - Domain terminology
+- `architecture` - Structure and dependencies
+- `tests` - ATDD compliance
+- `docs` - Documentation and i18n
+- `naming` - Domain terminology
 
 **CD**: Auto-deploy to Vercel staging on merge to main
 
