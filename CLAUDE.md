@@ -29,16 +29,17 @@ Personal finance dashboard MVP - a read-only Next.js application displaying net 
 
 ### Phase 4: Quality Checks
 
-9. Run static checks: `pnpm check-all`
-10. Fix any issues found
-11. Run agent reviews (Claude Code will invoke sub-agents from `.claude/agents/`)
-12. Fix issues from agent feedback
+9. Run auto-fix first: `pnpm format` (Prettier) and `pnpm lint --fix` (ESLint)
+10. Run static checks: `pnpm check-all`
+11. Fix any remaining issues manually
+12. Run agent reviews (apply rules from `.claude/agents/`)
+13. Fix issues from agent feedback
 
 ### Phase 5: Iterate (Max 3 Passes)
 
-13. Repeat quality checks → fix cycle
-14. **Maximum 3 iterations** to avoid infinite loops
-15. If issues persist after 3 passes → **stop and ask human for guidance**
+14. Repeat quality checks → fix cycle
+15. **Maximum 3 iterations** to avoid infinite loops
+16. If issues persist after 3 passes → **stop and ask human for guidance**
 
 ```
 ┌─────────────┐
@@ -55,6 +56,10 @@ Personal finance dashboard MVP - a read-only Next.js application displaying net 
        ▼          │
    AT passes? ────┘ No
        │ Yes
+       ▼
+┌─────────────┐
+│  Auto-fix   │  (pnpm format, pnpm lint --fix)
+└──────┬──────┘
        ▼
 ┌─────────────┐
 │Static Checks│◄──┐
