@@ -1,0 +1,50 @@
+[
+  {
+    "id": "snapshot-2024-01",
+    "date": "2024-01-31",
+    "balances": [
+      { "accountId": "checking-1", "amount": 5200 },
+      { "accountId": "savings-1", "amount": 15000 },
+      { "accountId": "deposit-1", "amount": 10000 },
+      { "accountId": "investment-1", "amount": 45000 },
+      { "accountId": "retirement-1", "amount": 120000 },
+      { "accountId": "property-1", "amount": 350000 },
+      { "accountId": "crypto-1", "amount": 8500 },
+      { "accountId": "credit-1", "amount": 2300 },
+      { "accountId": "mortgage-1", "amount": 280000 },
+      { "accountId": "auto-1", "amount": 12000 }
+    ]
+  },
+  {
+    "id": "snapshot-2024-02",
+    "date": "2024-02-29",
+    "balances": [
+      { "accountId": "checking-1", "amount": 4800 },
+      { "accountId": "savings-1", "amount": 16000 },
+      { "accountId": "deposit-1", "amount": 10000 },
+      { "accountId": "investment-1", "amount": 47500 },
+      { "accountId": "retirement-1", "amount": 125000 },
+      { "accountId": "property-1", "amount": 352000 },
+      { "accountId": "crypto-1", "amount": 12000 },
+      { "accountId": "credit-1", "amount": 1800 },
+      { "accountId": "mortgage-1", "amount": 279000 },
+      { "accountId": "auto-1", "amount": 11500 }
+    ]
+  },
+  {
+    "id": "snapshot-2024-03",
+    "date": "2024-03-31",
+    "balances": [
+      { "accountId": "checking-1", "amount": 6100 },
+      { "accountId": "savings-1", "amount": 17500 },
+      { "accountId": "deposit-1", "amount": 10000 },
+      { "accountId": "investment-1", "amount": 49000 },
+      { "accountId": "retirement-1", "amount": 128000 },
+      { "accountId": "property-1", "amount": 355000 },
+      { "accountId": "crypto-1", "amount": 15000 },
+      { "accountId": "credit-1", "amount": 2100 },
+      { "accountId": "mortgage-1", "amount": 278000 },
+      { "accountId": "auto-1", "amount": 11000 }
+    ]
+  }
+]

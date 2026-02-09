@@ -1,0 +1,71 @@
+[
+  {
+    "id": "checking-1",
+    "name": "Primary Checking",
+    "type": "cash",
+    "subtype": "checking",
+    "institution": "Chase Bank"
+  },
+  {
+    "id": "savings-1",
+    "name": "Emergency Fund",
+    "type": "cash",
+    "subtype": "savings",
+    "institution": "Chase Bank"
+  },
+  {
+    "id": "deposit-1",
+    "name": "6-Month CD",
+    "type": "cash",
+    "subtype": "deposit",
+    "institution": "Ally Bank"
+  },
+  {
+    "id": "investment-1",
+    "name": "Brokerage Account",
+    "type": "asset",
+    "subtype": "investment",
+    "institution": "Fidelity"
+  },
+  {
+    "id": "retirement-1",
+    "name": "401(k)",
+    "type": "asset",
+    "subtype": "retirement",
+    "institution": "Vanguard"
+  },
+  {
+    "id": "property-1",
+    "name": "Primary Residence",
+    "type": "asset",
+    "subtype": "property"
+  },
+  {
+    "id": "crypto-1",
+    "name": "Bitcoin Holdings",
+    "type": "asset",
+    "subtype": "crypto",
+    "institution": "Coinbase"
+  },
+  {
+    "id": "credit-1",
+    "name": "Chase Sapphire",
+    "type": "debt",
+    "subtype": "credit_card",
+    "institution": "Chase Bank"
+  },
+  {
+    "id": "mortgage-1",
+    "name": "Home Mortgage",
+    "type": "debt",
+    "subtype": "mortgage",
+    "institution": "Wells Fargo"
+  },
+  {
+    "id": "auto-1",
+    "name": "Car Loan",
+    "type": "debt",
+    "subtype": "auto_loan",
+    "institution": "Capital One"
+  }
+]
