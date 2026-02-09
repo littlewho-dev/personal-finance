@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm exec playwright install:*)",
+      "Bash(pnpm exec husky:*)",
+      "Bash(pnpm exec bddgen:*)",
+      "Bash(pnpm exec lint-staged:*)",
+      "Bash(pnpm exec commitlint:*)",
+      "Bash(pnpm type-check:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm check-all:*)",
+      "Bash(pnpm spell-check:*)",
+      "Bash(pnpm find-unused:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(nvm use:*)"
+    ]
+  }
+}
