@@ -79,6 +79,8 @@ Personal finance dashboard MVP - a read-only Next.js application displaying net 
 
 **No implementation code should be written without a corresponding feature file.**
 
+**Always commit when work is complete.** After all checks pass, stage and commit the changes with a conventional commit message. Do not leave finished work uncommitted.
+
 ## Environment Setup
 
 Before working on this project, always run:
@@ -136,7 +138,7 @@ features/                # Gherkin .feature files
 └── support/             # Playwright-bdd setup
 
 .claude/
-├── agents/              # Sub-agents (architecture, tests, docs, naming)
+├── agents/              # Sub-agents (architecture, tests, docs, naming, token-efficiency)
 └── skills/              # Custom skills (log-time)
 
 docs/
@@ -265,6 +267,7 @@ Claude Code sub-agents in `.claude/agents/` run during the quality check phase:
 - `tests` - ATDD compliance
 - `docs` - Documentation and i18n
 - `naming` - Domain terminology
+- `token-efficiency` - Code verbosity and tool output
 
 **CD**: Auto-deploy to Vercel staging on merge to main
 
@@ -316,6 +319,16 @@ Use the `/log-time` skill to record work sessions.
 - Husky + lint-staged + commitlint for git hooks
 - knip for dead code detection
 - cspell for spell checking
+
+## Code Style
+
+Write concise, minimal code. Every token costs money at inference time.
+
+- **No inline comments** unless the logic is genuinely non-obvious (e.g., a workaround or business rule that can't be expressed in code). Self-documenting names replace comments.
+- **Omit inferable types** - let TypeScript infer return types, variable types, and generic parameters where possible.
+- **Inline trivial variables** - don't create intermediate variables that are used once and add no clarity.
+- **Prefer short idiomatic patterns** - ternaries over single-branch if/else, early returns over nested blocks, implicit returns in arrow functions.
+- **Minimal test data** - use only the fields and records needed to cover the scenario.
 
 ## Token Efficiency
 
