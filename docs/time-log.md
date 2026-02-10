@@ -27,3 +27,9 @@ Development time tracking for Personal Finance Dashboard.
 - **Duration:** 10m
 - **Cost:** $2.00
 - **Summary:** Implemented category tables feature following ATDD workflow. Added three sortable tables (Cash, Assets, Debts) to the dashboard with Name, Subtype, Institution, Balance, and % of Category columns. Created CategoryTable client component, AccountWithBalance type, getAccountsWithBalances data helper, shadcn Table primitive, and acceptance tests. All static checks and agent reviews pass.
+
+## 2026-02-10 (continued 2)
+
+- **Duration:** 30m
+- **Cost:** $3.00
+- **Summary:** Wrote PRD for v2 covering Supabase integration: email/password auth, multi-tenant RLS, database schema, API routes + React Query hooks architecture, test data factories and seed scripts, and phased migration plan from v1.

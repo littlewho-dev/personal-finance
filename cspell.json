@@ -14,7 +14,9 @@
     "networth",
     "subtype",
     "ATDD",
-    "logomark"
+    "logomark",
+    "supabase",
+    "timestamptz"
   ],
   "ignorePaths": ["node_modules", ".next", "pnpm-lock.yaml", "*.json"]
 }
