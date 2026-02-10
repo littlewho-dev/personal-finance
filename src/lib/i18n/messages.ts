@@ -36,6 +36,7 @@ export const messages = {
     asset: 'Assets',
     debt: 'Debts',
   },
+  // Subtypes are used by the CategoryTable component (not yet implemented)
   subtypes: {
     checking: 'Checking',
     savings: 'Savings',

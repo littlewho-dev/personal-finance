@@ -121,13 +121,13 @@ pnpm check-all           # lint + format:check + type-check + spell-check + find
 src/
 ├── app/                 # Next.js App Router pages
 ├── components/
-│   ├── ui/              # shadcn/ui primitives
-│   ├── dashboard/       # Dashboard-specific components
-│   ├── history/         # History page components
-│   └── common/          # Shared components (CurrencyDisplay)
+│   ├── ui/              # shadcn/ui primitives (Card, etc.)
+│   ├── dashboard/       # Dashboard-specific (NetWorthCard, CategoryTable)
+│   ├── history/         # History page (SnapshotList)
+│   └── common/          # Shared across features (CurrencyDisplay)
 ├── lib/
 │   ├── types.ts         # TypeScript interfaces
-│   ├── data.ts          # Mock data loading functions
+│   ├── data.ts          # Mock data loading and calculations
 │   └── i18n/messages.ts # Externalized UI strings
 └── data/                # Mock JSON files (accounts, snapshots, settings)
 
@@ -144,12 +144,92 @@ docs/
 └── time-log.md          # Time tracking entries
 ```
 
+### Feature Status
+
+**Implemented:**
+
+- Dashboard net worth card with category breakdown
+- CurrencyDisplay component (formats amounts with locale)
+- Mock data layer (accounts, snapshots, settings)
+
+**Not yet implemented:**
+
+- Category tables (account-level detail within each category)
+- History page (`/history`) with SnapshotList component
+- Settings page (`/settings`) displaying currency configuration
+
 ## Key Patterns
 
 - **i18n-ready**: All UI strings in `lib/i18n/messages.ts`, never hardcoded
 - **Theming**: Colors via CSS variables in `globals.css`
-- **Data flow**: Components read from `lib/data.ts` which loads mock JSON
+- **Data flow**: Pages fetch data from `lib/data.ts` and pass it as props to components
 - **Currency formatting**: Use `CurrencyDisplay` component with locale from settings
+
+### i18n Pattern
+
+All user-facing strings must be externalized in `lib/i18n/messages.ts`. Never hardcode UI text.
+
+```typescript
+// Adding new strings - use camelCase keys in the appropriate section:
+export const messages = {
+  dashboard: {
+    netWorth: 'Net Worth',
+  },
+}
+
+// In components - import and access via dot notation:
+import { messages } from '@/lib/i18n/messages';
+<h1>{messages.dashboard.netWorth}</h1>
+```
+
+### Data Flow
+
+Pages orchestrate data fetching and pass prepared data to feature components as props. Components never fetch data directly.
+
+```
+app/page.tsx (data orchestration)
+  → lib/data.ts (getAccounts, getLatestSnapshot, getSettings, calculateNetWorth)
+  → components/dashboard/net-worth-card.tsx (presentation)
+    → components/common/currency-display.tsx (formatting)
+    → components/ui/card.tsx (primitives)
+```
+
+### Acceptance Test Conventions
+
+**Feature files:** `features/<feature-name>.feature`
+
+Use Gherkin syntax with Given-When-Then. One scenario per feature, additional scenarios only for critical edge cases.
+
+```gherkin
+Feature: Dashboard Net Worth Display
+
+  As a user
+  I want to see my net worth
+  So that I understand my financial position
+
+  Scenario: View net worth with category breakdown
+    Given I am on the dashboard page
+    Then I should see the net worth displayed
+```
+
+**Step definitions:** `features/steps/<feature-name>.steps.ts`
+
+```typescript
+import { expect } from '@playwright/test';
+import { createBdd } from 'playwright-bdd';
+
+const { Given, Then } = createBdd();
+
+Given('I am on the dashboard page', async ({ page }) => {
+  await page.goto('/');
+});
+```
+
+**Naming conventions:**
+
+- Feature file: `<feature>.feature` (e.g., `dashboard.feature`)
+- Step file: `<feature>.steps.ts` (e.g., `dashboard.steps.ts`)
+- Test IDs: kebab-case `data-testid` (e.g., `net-worth-card`)
 
 ## CI/CD
 
