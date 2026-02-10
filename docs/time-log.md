@@ -21,3 +21,9 @@ Development time tracking for Personal Finance Dashboard.
 - **Duration:** 10m
 - **Cost:** $0.70
 - **Summary:** Created token-efficiency review agent in `.claude/agents/token-efficiency.md` following existing agent patterns. Added Code Style section to CLAUDE.md with guidelines for concise code: no inline comments, omit inferable types, inline trivial variables, prefer short idiomatic patterns. Added auto-commit rule to development workflow. Updated agent review list to include the new token-efficiency agent.
+
+## 2026-02-10 (continued)
+
+- **Duration:** 10m
+- **Cost:** $2.00
+- **Summary:** Implemented category tables feature following ATDD workflow. Added three sortable tables (Cash, Assets, Debts) to the dashboard with Name, Subtype, Institution, Balance, and % of Category columns. Created CategoryTable client component, AccountWithBalance type, getAccountsWithBalances data helper, shadcn Table primitive, and acceptance tests. All static checks and agent reviews pass.
