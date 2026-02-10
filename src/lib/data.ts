@@ -1,4 +1,4 @@
-import type { Account, Snapshot, Settings, NetWorthBreakdown } from './types';
+import type { Account, AccountWithBalance, Snapshot, Settings, NetWorthBreakdown } from './types';
 
 import accountsData from '@/data/accounts.json';
 import snapshotsData from '@/data/snapshots.json';
@@ -20,6 +20,16 @@ export function getLatestSnapshot(): Snapshot | null {
 
 export function getSettings(): Settings {
   return settingsData as Settings;
+}
+
+export function getAccountsWithBalances(
+  snapshot: Snapshot,
+  accounts: Account[]
+): AccountWithBalance[] {
+  const balanceMap = new Map(snapshot.balances.map((b) => [b.accountId, b.amount]));
+  return accounts
+    .filter((a) => balanceMap.has(a.id))
+    .map((a) => ({ ...a, balance: balanceMap.get(a.id)! }));
 }
 
 export function calculateNetWorth(snapshot: Snapshot, accounts: Account[]): NetWorthBreakdown {

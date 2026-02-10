@@ -45,6 +45,15 @@ export interface Settings {
   currency: CurrencySettings;
 }
 
+export interface AccountWithBalance {
+  id: string;
+  name: string;
+  type: AccountType;
+  subtype: AccountSubtype;
+  institution?: string;
+  balance: number;
+}
+
 export interface NetWorthBreakdown {
   cash: number;
   assets: number;

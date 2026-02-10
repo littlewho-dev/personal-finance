@@ -18,6 +18,9 @@ export const messages = {
     balance: 'Balance',
     institution: 'Institution',
     type: 'Type',
+    subtype: 'Subtype',
+    percentOfCategory: '% of Category',
+    emptyInstitution: '\u2014',
   },
   history: {
     title: 'History',
@@ -36,7 +39,6 @@ export const messages = {
     asset: 'Assets',
     debt: 'Debts',
   },
-  // Subtypes are used by the CategoryTable component (not yet implemented)
   subtypes: {
     checking: 'Checking',
     savings: 'Savings',

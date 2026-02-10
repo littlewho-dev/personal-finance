@@ -151,12 +151,12 @@ docs/
 **Implemented:**
 
 - Dashboard net worth card with category breakdown
+- Category tables (account-level detail with sortable columns)
 - CurrencyDisplay component (formats amounts with locale)
 - Mock data layer (accounts, snapshots, settings)
 
 **Not yet implemented:**
 
-- Category tables (account-level detail within each category)
 - History page (`/history`) with SnapshotList component
 - Settings page (`/settings`) displaying currency configuration
 
